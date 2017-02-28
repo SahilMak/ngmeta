@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="ngmeta" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0.0</em>
+            <em>API Docs for: 1.1.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,8 +43,6 @@
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/MetaData.html">MetaData</a></li>
-                                <li><a href="../modules/TagData.html">TagData</a></li>
                             </ul>
                         </div>
                     </div>
@@ -84,172 +82,182 @@
     <pre class="code prettyprint linenums">
 import { Injectable, Inject, Renderer, RenderComponentType, RootRenderer, ViewEncapsulation } from &quot;@angular/core&quot;;
 import { DOCUMENT } from &quot;@angular/platform-browser&quot;;
+import { Router, NavigationEnd } from &#x27;@angular/router&#x27;;
 
-import { TagData } from &quot;./tag-data.interface&quot;;
+import { TagData, MetaData } from &quot;./tag-data.interface&quot;;
 
 /**
 * Service that allows setting and updating of meta tags, title tags, and canonical tags.
-*
 * @class NGMeta
 * @constructor
 */
 @Injectable()
 export class NGMeta {
-  private body: any;
-  private head: any;
-  private isScrollEnabled: boolean = false;
-  private renderer: Renderer;
+  private _body: any;
+  private _head: any;
+  private _scrollEnabled: boolean = true;
+  private _renderer: Renderer;
+
   /**
+  * Initializes service. Creates faux DOM component to abstractly interact with DOM. Subscribes to route events.
   * @method constructor
   */
-  constructor( @Inject(DOCUMENT) private document: any, private rootRenderer: RootRenderer) {
-    this.body = this.document.body;
-    this.head = this.document.head;
+  constructor( @Inject(DOCUMENT) private _document: any, private _rootRenderer: RootRenderer, private _router: Router) {
+    this._body = this._document.body;
+    this._head = this._document.head;
 
     let type = new RenderComponentType(&quot;&quot;, &quot;&quot;, 0, ViewEncapsulation.None, [], null);
-    this.renderer = rootRenderer.renderComponent(type);
-  }
-  /**
-  * Creates HTML for a canonical tag.
-  *
-  * @public
-  * @method setCanonical
-  * @param {String} canonicalURL Canonical URL for the page.
-  */
-  public setCanonical(canonicalURL: string): void {
-    try {
-      this.removeTag(&quot;[rel=\&quot;canonical\&quot;]&quot;);
+    this._renderer = _rootRenderer.renderComponent(type);
 
-      const canonical = this.renderer.createElement(this.head, &quot;link&quot;);
-      this.renderer.setElementAttribute(canonical, &quot;rel&quot;, &quot;canonical&quot;);
-      this.renderer.setElementAttribute(canonical, &quot;href&quot;, canonicalURL);
+    this._router.events.subscribe((evt) =&gt; {
+      this._scrollToTop(evt);
+    });
+  }
+
+  /**
+  * Sets canonical tag for page, to call &#x60;this._ngmeta.canonical = &#x27;https://www.google.com&#x27;;&#x60;.
+  * @public
+  * @method canonical
+  * @param {string} canonicalURL Canonical URL for the page.
+  */
+  set canonical(canonicalURL: string) {
+    try {
+      this._removeTag(&quot;[rel=\&quot;canonical\&quot;]&quot;);
+      const canonical = this._renderer.createElement(this._head, &quot;link&quot;);
+      this._renderer.setElementAttribute(canonical, &quot;rel&quot;, &quot;canonical&quot;);
+      this._renderer.setElementAttribute(canonical, &quot;href&quot;, canonicalURL);
     } catch (e) { }
   }
+
   /**
-  * Creates HTML for a title tag.
-  *
+  * Returns string value of current page&#x27;s title, to call &#x60;let title: string = this._ngmeta.title;&#x60;.
   * @public
-  * @method setTitle
-  * @param {String} title Title value for the page.
+  * @method title
+  * @return {string} Current page&#x27;s title.
   */
-  public setTitle(title: string): void {
+  get title(): string {
     try {
-      this.document.title = title;
+      return this._document.title;
     } catch (e) { }
   }
-  /**
-  * Creates HTML for a meta tag of any attribute.
-  *
-  * @public
-  * @method setMeta
-  * @param {String} attribute The attribute/type of tag to be generated, such as a &quot;name&quot; meta tag or a &quot;property&quot; meta tag.
-  * @param {String} type Type of tag being generated, such as &quot;description&quot; or &quot;og:title&quot;.
-  * @param {String} content Content/details of the tag.
-  */
-  public setMeta(attribute: string, type: string, content: string): void {
-    try {
-      if (typeof attribute === &quot;string&quot; &amp;&amp; typeof type === &quot;string&quot; &amp;&amp; typeof content === &quot;string&quot;) {
-        this.removeTag(&#x60;[${attribute}=&quot;${type}&quot;]&#x60;);
 
-        const meta = this.renderer.createElement(this.head, &quot;meta&quot;);
-        this.renderer.setElementAttribute(meta, attribute, type);
-        this.renderer.setElementAttribute(meta, &quot;content&quot;, content);
+  /**
+  * Sets &#x60;&lt;title&gt;&lt;/title&gt;&#x60; tag for page, to call &#x60;this._ngmeta.title = &#x27;Google&#x27;;&#x60;.
+  * @public
+  * @method title
+  * @param {string} title Title value for the page.
+  */
+  set title(title: string) {
+    try {
+      this._document.title = title;
+    } catch (e) { }
+  }
+
+  /**
+  * Returns boolean value if scroll to top is enabled, to call &#x60;let scrollEnabled: boolean = this._ngmeta.scrollEnabled;&#x60;.
+  * @public
+  * @method scrollEnabled
+  * @return {boolean} If scroll to top is enabled.
+  */
+  get scrollEnabled(): boolean {
+    return this._scrollEnabled;
+  }
+
+  /**
+  * Sets wether &#x60;&lt;body&gt;&lt;/body&gt;&#x60; should scroll to top on route change, to call &#x60;this._ngmeta.scrollEnabled = true;&#x60;.
+  * @public
+  * @method scrollEnabled
+  * @param {Boolean} scroll If &#x60;&lt;body&gt;&lt;/body&gt;&#x60; should scroll.
+  */
+  set scrollEnabled(scroll: boolean) {
+    this._scrollEnabled = scroll;
+  }
+
+  /**
+  * Creates HTML for a &#x60;&lt;meta&gt;&#x60; tag of any attribute.
+  * @public
+  * @method createMeta
+  * @param {MetaData} metaData The attribute (like &quot;name&quot; or &quot;property&quot;) type (like &quot;description&quot; or &quot;og:title&quot;) and content of the tag.
+  */
+  public createMeta(metaData: MetaData): void {
+    try {
+      if (typeof metaData.attribute === &quot;string&quot; &amp;&amp; typeof metaData.type === &quot;string&quot; &amp;&amp; typeof metaData.content === &quot;string&quot;) {
+        this._removeTag(&#x60;[${metaData.attribute}=&quot;${metaData.type}&quot;]&#x60;);
+
+        const meta = this._renderer.createElement(this._head, &quot;meta&quot;);
+        this._renderer.setElementAttribute(meta, metaData.attribute, metaData.type);
+        this._renderer.setElementAttribute(meta, &quot;content&quot;, metaData.content);
       }
     } catch (e) { }
   }
-  /**
-  * Scrolls web page to top of &lt;body&gt;.
-  *
-  * @private
-  * @method scrollToTop
-  * @param {Number} duration Duration in time for scroll to top of page.
-  * @returns {Boolean} If scroll was successful.
-  */
-  private scrollToTop(duration: number): boolean {
-    if (duration &lt;= 0) return false;
-    if (this.isScrollEnabled) {
-      let difference = 0 - this.body.scrollTop;
-      let perTick = difference / duration * 10;
 
-      setTimeout(function () {
-        this.body.scrollTop = this.body.scrollTop + perTick;
-        if (this.body.scrollTop === 0) return;
-        this.scrollToTop(duration - 10);
-      }, 10);
-      return true;
-    }
-    return false;
-  }
   /**
-  * Set function setting if page should scroll to top when scrollToTop function is called.
-  *
-  * @public
-  * @method setScrollEnabled
-  * @param {Boolean} scroll New scroll value.
-  * @return {Boolean} Current scroll value.
-  */
-  public setScrollEnabled(scroll: boolean): boolean {
-    this.isScrollEnabled = scroll;
-    return this.isScrollEnabled;
-  }
-  /**
-  * Set function setting all &lt;head&gt; metadata.
-  *
+  * Set function setting all &#x60;&lt;head&gt;&lt;/head&gt;&#x60; metadata.
   * @public
   * @method setHead
   * @param {TagData} tagData An object of the new values for the tags an user wants.
-  * @return {Boolean} If setting tags was successful.
   * @throws {Error} An error.
   */
   public setHead(tagData: TagData): void {
     try {
       // Edit &lt;title&gt;
       if (typeof tagData.title === &quot;string&quot;) {
-        this.setTitle(tagData.title);
+        this.title = tagData.title;
       }
       // Edit meta tags with Name attribute
       if (tagData.name instanceof Array) {
         for (let detail of tagData.name) {
-          this.setMeta(&quot;description&quot;, detail.type, detail.content);
+          detail.attribute = &quot;name&quot;;
+          this.createMeta(detail);
         }
       }
       // Edit meta tags with Property attribute
       if (tagData.property instanceof Array) {
         for (let detail of tagData.property) {
-          this.setMeta(&quot;property&quot;, detail.type, detail.content);
+          detail.attribute = &quot;property&quot;;
+          this.createMeta(detail);
         }
       }
       // Edit meta tags with any attribute
-      if (tagData.name instanceof Array) {
-        for (let detail of tagData.name) {
-          this.setMeta(detail.attribute, detail.type, detail.content);
+      if (tagData.meta instanceof Array) {
+        for (let detail of tagData.meta) {
+          this.createMeta(detail);
         }
       }
       // Edit canonical tag
       if (typeof tagData.canonical === &quot;string&quot;) {
-        this.setCanonical(tagData.canonical);
-      }
-      // Scroll to top if not Anchor Tag link
-      if (location.href.search(&quot;#&quot;) === -1) {
-        this.scrollToTop(1500);
+        this.canonical = tagData.canonical;
       }
     } catch (e) {
       throw e;
     }
   }
+
   /**
-  * Removes HTML from HEAD for a tag.
-  *
+  * Removes HTML from &#x60;&lt;head&gt;&lt;/head&gt;&#x60; for a tag.
   * @private
-  * @method removeTag
+  * @method _removeTag
   * @param {String} tagSelector Selector detail for tag to remove.
   */
-  private removeTag(tagSelector: string): void {
+  private _removeTag(tagSelector: string): void {
     try {
-      let head = this.document.head;
-      let tag = this.document.querySelector(tagSelector);
+      let head = this._document.head;
+      let tag = this._document.querySelector(tagSelector);
       head.removeChild(tag);
     } catch (e) { }
+  }
+
+  /**
+  * Scrolls web page to top of &#x60;&lt;body&gt;&lt;/body&gt;&#x60;.
+  * @private
+  * @method _scrollToTop
+  * @param {Number} duration Duration in time for scroll to top of page.
+  */
+  private _scrollToTop(evt: any): void {
+    if (!(evt instanceof NavigationEnd) || evt.url.includes(&quot;#&quot;) || !this.scrollEnabled) {
+      return;
+    }
+    this._body.scrollTop = 0;
   }
 }
 

@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "ngmeta",
-        "description": "A simple tool for updating meta-tags in an Angular 2 app.",
-        "version": "1.0.0",
+        "description": "A tool for updating meta-tags in an Angular application.",
+        "version": "1.1.0",
         "url": "https://ngmeta.michaelsolati.com/"
     },
     "files": {
@@ -17,43 +17,13 @@
         },
         "src/tag-data.interface.ts": {
             "name": "src/tag-data.interface.ts",
-            "modules": {
-                "MetaData": 1,
-                "TagData": 1
-            },
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         }
     },
-    "modules": {
-        "MetaData": {
-            "name": "MetaData",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "NGMeta": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "src/ngmeta.service.ts",
-            "line": 6,
-            "description": "An interface/data type for an the TagData interface."
-        },
-        "TagData": {
-            "name": "TagData",
-            "submodules": {},
-            "elements": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "src/tag-data.interface.ts",
-            "line": 12,
-            "description": "An interface/data type for an object that is used with the 'setHead()' function."
-        }
-    },
+    "modules": {},
     "classes": {
         "NGMeta": {
             "name": "NGMeta",
@@ -63,9 +33,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "MetaData",
             "file": "src/ngmeta.service.ts",
-            "line": 6,
+            "line": 7,
             "description": "Service that allows setting and updating of meta tags, title tags, and canonical tags.",
             "is_constructor": 1
         }
@@ -74,19 +43,20 @@
     "classitems": [
         {
             "file": "src/ngmeta.service.ts",
-            "line": 18,
+            "line": 19,
+            "description": "Initializes service. Creates faux DOM component to abstractly interact with DOM. Subscribes to route events.",
             "itemtype": "method",
             "name": "constructor",
             "class": "NGMeta"
         },
         {
             "file": "src/ngmeta.service.ts",
-            "line": 28,
-            "description": "Creates HTML for a canonical tag.",
+            "line": 35,
+            "description": "Sets canonical tag for page, to call `this._ngmeta.canonical = 'https://www.google.com';`.",
             "access": "public",
             "tagname": "",
             "itemtype": "method",
-            "name": "setCanonical",
+            "name": "canonical",
             "params": [
                 {
                     "name": "canonicalURL",
@@ -98,12 +68,26 @@
         },
         {
             "file": "src/ngmeta.service.ts",
-            "line": 44,
-            "description": "Creates HTML for a title tag.",
+            "line": 50,
+            "description": "Returns string value of current page's title, to call `let title: string = this._ngmeta.title;`.",
             "access": "public",
             "tagname": "",
             "itemtype": "method",
-            "name": "setTitle",
+            "name": "title",
+            "return": {
+                "description": "Current page's title.",
+                "type": "String"
+            },
+            "class": "NGMeta"
+        },
+        {
+            "file": "src/ngmeta.service.ts",
+            "line": 62,
+            "description": "Sets `<title></title>` tag for page, to call `this._ngmeta.title = 'Google';`.",
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "title",
             "params": [
                 {
                     "name": "title",
@@ -115,77 +99,56 @@
         },
         {
             "file": "src/ngmeta.service.ts",
-            "line": 56,
-            "description": "Creates HTML for a meta tag of any attribute.",
+            "line": 74,
+            "description": "Returns boolean value if scroll to top is enabled, to call `let scrollEnabled: boolean = this._ngmeta.scrollEnabled;`.",
             "access": "public",
             "tagname": "",
             "itemtype": "method",
-            "name": "setMeta",
-            "params": [
-                {
-                    "name": "attribute",
-                    "description": "The attribute/type of tag to be generated, such as a \"name\" meta tag or a \"property\" meta tag.",
-                    "type": "String"
-                },
-                {
-                    "name": "type",
-                    "description": "Type of tag being generated, such as \"description\" or \"og:title\".",
-                    "type": "String"
-                },
-                {
-                    "name": "content",
-                    "description": "Content/details of the tag.",
-                    "type": "String"
-                }
-            ],
-            "class": "NGMeta"
-        },
-        {
-            "file": "src/ngmeta.service.ts",
-            "line": 76,
-            "description": "Scrolls web page to top of <body>.",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "scrollToTop",
-            "params": [
-                {
-                    "name": "duration",
-                    "description": "Duration in time for scroll to top of page.",
-                    "type": "Number"
-                }
-            ],
+            "name": "scrollEnabled",
             "return": {
-                "description": "If scroll was successful.",
+                "description": "If scroll to top is enabled.",
                 "type": "Boolean"
             },
             "class": "NGMeta"
         },
         {
             "file": "src/ngmeta.service.ts",
-            "line": 99,
-            "description": "Set function setting if page should scroll to top when scrollToTop function is called.",
+            "line": 84,
+            "description": "Sets wether `<body></body>` should scroll to top on route change, to call `this._ngmeta.scrollEnabled = true;`.",
             "access": "public",
             "tagname": "",
             "itemtype": "method",
-            "name": "setScrollEnabled",
+            "name": "scrollEnabled",
             "params": [
                 {
                     "name": "scroll",
-                    "description": "New scroll value.",
+                    "description": "If `<body></body>` should scroll.",
                     "type": "Boolean"
                 }
             ],
-            "return": {
-                "description": "Current scroll value.",
-                "type": "Boolean"
-            },
             "class": "NGMeta"
         },
         {
             "file": "src/ngmeta.service.ts",
-            "line": 111,
-            "description": "Set function setting all <head> metadata.",
+            "line": 94,
+            "description": "Creates HTML for a `<meta>` tag of any attribute.",
+            "access": "public",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "createMeta",
+            "params": [
+                {
+                    "name": "metaData",
+                    "description": "The attribute (like \"name\" or \"property\") type (like \"description\" or \"og:title\") and content of the tag.",
+                    "type": "MetaData"
+                }
+            ],
+            "class": "NGMeta"
+        },
+        {
+            "file": "src/ngmeta.service.ts",
+            "line": 112,
+            "description": "Set function setting all `<head></head>` metadata.",
             "access": "public",
             "tagname": "",
             "itemtype": "method",
@@ -197,10 +160,6 @@
                     "type": "TagData"
                 }
             ],
-            "return": {
-                "description": "If setting tags was successful.",
-                "type": "Boolean"
-            },
             "throws": {
                 "description": "An error.",
                 "type": "Error"
@@ -209,12 +168,12 @@
         },
         {
             "file": "src/ngmeta.service.ts",
-            "line": 156,
-            "description": "Removes HTML from HEAD for a tag.",
+            "line": 154,
+            "description": "Removes HTML from `<head></head>` for a tag.",
             "access": "private",
             "tagname": "",
             "itemtype": "method",
-            "name": "removeTag",
+            "name": "_removeTag",
             "params": [
                 {
                     "name": "tagSelector",
@@ -223,12 +182,45 @@
                 }
             ],
             "class": "NGMeta"
+        },
+        {
+            "file": "src/ngmeta.service.ts",
+            "line": 168,
+            "description": "Scrolls web page to top of `<body></body>`.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_scrollToTop",
+            "params": [
+                {
+                    "name": "duration",
+                    "description": "Duration in time for scroll to top of page.",
+                    "type": "Number"
+                }
+            ],
+            "class": "NGMeta"
+        },
+        {
+            "file": "src/tag-data.interface.ts",
+            "line": 1,
+            "description": "Interface for an the TagData interface.",
+            "class": ""
+        },
+        {
+            "file": "src/tag-data.interface.ts",
+            "line": 10,
+            "description": "Interface for an object that is used with the 'setHead()' function.",
+            "class": ""
         }
     ],
     "warnings": [
         {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/ngmeta.service.ts:76"
+            "message": "Missing item type\nInterface for an the TagData interface.",
+            "line": " src/tag-data.interface.ts:1"
+        },
+        {
+            "message": "Missing item type\nInterface for an object that is used with the 'setHead()' function.",
+            "line": " src/tag-data.interface.ts:10"
         }
     ]
 }

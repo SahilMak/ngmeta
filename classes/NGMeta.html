@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="ngmeta" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0.0</em>
+            <em>API Docs for: 1.1.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -43,8 +43,6 @@
                 
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/MetaData.html">MetaData</a></li>
-                                <li><a href="../modules/TagData.html">TagData</a></li>
                             </ul>
                         </div>
                     </div>
@@ -83,10 +81,9 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_ngmeta.service.ts.html#l6"><code>src&#x2F;ngmeta.service.ts:6</code></a>
+            Defined in: <a href="../files/src_ngmeta.service.ts.html#l7"><code>src&#x2F;ngmeta.service.ts:7</code></a>
         </div>
 
-            Module: <a href="../modules/MetaData.html">MetaData</a>
 
 </div>
 
@@ -113,7 +110,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l6"><code>src&#x2F;ngmeta.service.ts:6</code></a>
+        <a href="../files/src_ngmeta.service.ts.html#l7"><code>src&#x2F;ngmeta.service.ts:7</code></a>
         </p>
 
 
@@ -145,20 +142,32 @@
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
+                            <li class="index-item method private">
+                                <a href="#method__removeTag">_removeTag</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__scrollToTop">_scrollToTop</a>
+
+                            </li>
+                            <li class="index-item method public">
+                                <a href="#method_canonical">canonical</a>
+
+                            </li>
                             <li class="index-item method">
                                 <a href="#method_constructor">constructor</a>
 
                             </li>
-                            <li class="index-item method private">
-                                <a href="#method_removeTag">removeTag</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method_scrollToTop">scrollToTop</a>
+                            <li class="index-item method public">
+                                <a href="#method_createMeta">createMeta</a>
 
                             </li>
                             <li class="index-item method public">
-                                <a href="#method_setCanonical">setCanonical</a>
+                                <a href="#method_scrollEnabled">scrollEnabled</a>
+
+                            </li>
+                            <li class="index-item method public">
+                                <a href="#method_scrollEnabled">scrollEnabled</a>
 
                             </li>
                             <li class="index-item method public">
@@ -166,15 +175,11 @@
 
                             </li>
                             <li class="index-item method public">
-                                <a href="#method_setMeta">setMeta</a>
+                                <a href="#method_title">title</a>
 
                             </li>
                             <li class="index-item method public">
-                                <a href="#method_setScrollEnabled">setScrollEnabled</a>
-
-                            </li>
-                            <li class="index-item method public">
-                                <a href="#method_setTitle">setTitle</a>
+                                <a href="#method_title">title</a>
 
                             </li>
                     </ul>
@@ -187,38 +192,8 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_constructor" class="method item">
-    <h3 class="name"><code>constructor</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l18"><code>src&#x2F;ngmeta.service.ts:18</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-
-
-
-</div>
-<div id="method_removeTag" class="method item private">
-    <h3 class="name"><code>removeTag</code></h3>
+<div id="method__removeTag" class="method item private">
+    <h3 class="name"><code>_removeTag</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -239,7 +214,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l156"><code>src&#x2F;ngmeta.service.ts:156</code></a>
+        <a href="../files/src_ngmeta.service.ts.html#l154"><code>src&#x2F;ngmeta.service.ts:154</code></a>
         </p>
 
 
@@ -247,7 +222,7 @@
     </div>
 
     <div class="description">
-        <p>Removes HTML from HEAD for a tag.</p>
+        <p>Removes HTML from <code>&lt;head&gt;&lt;/head&gt;</code> for a tag.</p>
 
     </div>
 
@@ -272,8 +247,8 @@
 
 
 </div>
-<div id="method_scrollToTop" class="method item private">
-    <h3 class="name"><code>scrollToTop</code></h3>
+<div id="method__scrollToTop" class="method item private">
+    <h3 class="name"><code>_scrollToTop</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -283,9 +258,6 @@
             </ul><span class="paren">)</span>
         </div>
 
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
 
 
         <span class="flag private">private</span>
@@ -297,7 +269,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l76"><code>src&#x2F;ngmeta.service.ts:76</code></a>
+        <a href="../files/src_ngmeta.service.ts.html#l168"><code>src&#x2F;ngmeta.service.ts:168</code></a>
         </p>
 
 
@@ -305,7 +277,7 @@
     </div>
 
     <div class="description">
-        <p>Scrolls web page to top of <body>.</p>
+        <p>Scrolls web page to top of <code>&lt;body&gt;&lt;/body&gt;</code>.</p>
 
     </div>
 
@@ -327,20 +299,11 @@
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>If scroll was successful.</p>
-
-            </div>
-        </div>
 
 
 </div>
-<div id="method_setCanonical" class="method item public">
-    <h3 class="name"><code>setCanonical</code></h3>
+<div id="method_canonical" class="method item public">
+    <h3 class="name"><code>canonical</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -361,7 +324,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l28"><code>src&#x2F;ngmeta.service.ts:28</code></a>
+        <a href="../files/src_ngmeta.service.ts.html#l35"><code>src&#x2F;ngmeta.service.ts:35</code></a>
         </p>
 
 
@@ -369,7 +332,7 @@
     </div>
 
     <div class="description">
-        <p>Creates HTML for a canonical tag.</p>
+        <p>Sets canonical tag for page, to call <code>this._ngmeta.canonical = 'https://www.google.com';</code>.</p>
 
     </div>
 
@@ -394,16 +357,96 @@
 
 
 </div>
-<div id="method_setHead" class="method item public">
-    <h3 class="name"><code>setHead</code></h3>
+<div id="method_constructor" class="method item">
+    <h3 class="name"><code>constructor</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_ngmeta.service.ts.html#l19"><code>src&#x2F;ngmeta.service.ts:19</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Initializes service. Creates faux DOM component to abstractly interact with DOM. Subscribes to route events.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_createMeta" class="method item public">
+    <h3 class="name"><code>createMeta</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>tagData</code>
+                        <code>metaData</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
+
+
+
+        <span class="flag public">public</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_ngmeta.service.ts.html#l94"><code>src&#x2F;ngmeta.service.ts:94</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Creates HTML for a <code>&lt;meta&gt;</code> tag of any attribute.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">metaData</code>
+                        <span class="type">MetaData</span>
+
+
+                    <div class="param-description">
+                        <p>The attribute (like &quot;name&quot; or &quot;property&quot;) type (like &quot;description&quot; or &quot;og:title&quot;) and content of the tag.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_scrollEnabled" class="method item public">
+    <h3 class="name"><code>scrollEnabled</code></h3>
+
+        <span class="paren">()</span>
 
         <span class="returns-inline">
             <span class="type">Boolean</span>
@@ -419,7 +462,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l111"><code>src&#x2F;ngmeta.service.ts:111</code></a>
+        <a href="../files/src_ngmeta.service.ts.html#l74"><code>src&#x2F;ngmeta.service.ts:74</code></a>
         </p>
 
 
@@ -427,7 +470,109 @@
     </div>
 
     <div class="description">
-        <p>Set function setting all <head> metadata.</p>
+        <p>Returns boolean value if scroll to top is enabled, to call <code>let scrollEnabled: boolean = this._ngmeta.scrollEnabled;</code>.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+                    <p>If scroll to top is enabled.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_scrollEnabled" class="method item public">
+    <h3 class="name"><code>scrollEnabled</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>scroll</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag public">public</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_ngmeta.service.ts.html#l84"><code>src&#x2F;ngmeta.service.ts:84</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Sets wether <code>&lt;body&gt;&lt;/body&gt;</code> should scroll to top on route change, to call <code>this._ngmeta.scrollEnabled = true;</code>.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">scroll</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>If <code>&lt;body&gt;&lt;/body&gt;</code> should scroll.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setHead" class="method item public">
+    <h3 class="name"><code>setHead</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>tagData</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag public">public</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_ngmeta.service.ts.html#l112"><code>src&#x2F;ngmeta.service.ts:112</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set function setting all <code>&lt;head&gt;&lt;/head&gt;</code> metadata.</p>
 
     </div>
 
@@ -449,15 +594,6 @@
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>If setting tags was successful.</p>
-
-            </div>
-        </div>
 
         <div class="throws">
             <h4>Throws:</h4>
@@ -470,102 +606,13 @@
         </div>
 
 </div>
-<div id="method_setMeta" class="method item public">
-    <h3 class="name"><code>setMeta</code></h3>
+<div id="method_title" class="method item public">
+    <h3 class="name"><code>title</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>attribute</code>
-                </li>
-                <li class="arg">
-                        <code>type</code>
-                </li>
-                <li class="arg">
-                        <code>content</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-        <span class="flag public">public</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l56"><code>src&#x2F;ngmeta.service.ts:56</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Creates HTML for a meta tag of any attribute.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">attribute</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>The attribute/type of tag to be generated, such as a &quot;name&quot; meta tag or a &quot;property&quot; meta tag.</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">type</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>Type of tag being generated, such as &quot;description&quot; or &quot;og:title&quot;.</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">content</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>Content/details of the tag.</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setScrollEnabled" class="method item public">
-    <h3 class="name"><code>setScrollEnabled</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>scroll</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Boolean</span>
+            <span class="type">String</span>
         </span>
 
 
@@ -578,7 +625,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l99"><code>src&#x2F;ngmeta.service.ts:99</code></a>
+        <a href="../files/src_ngmeta.service.ts.html#l50"><code>src&#x2F;ngmeta.service.ts:50</code></a>
         </p>
 
 
@@ -586,42 +633,25 @@
     </div>
 
     <div class="description">
-        <p>Set function setting if page should scroll to top when scrollToTop function is called.</p>
+        <p>Returns string value of current page's title, to call <code>let title: string = this._ngmeta.title;</code>.</p>
 
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">scroll</code>
-                        <span class="type">Boolean</span>
-
-
-                    <div class="param-description">
-                        <p>New scroll value.</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
 
         <div class="returns">
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>Current scroll value.</p>
+                        <span class="type">String</span>:
+                    <p>Current page's title.</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_setTitle" class="method item public">
-    <h3 class="name"><code>setTitle</code></h3>
+<div id="method_title" class="method item public">
+    <h3 class="name"><code>title</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -642,7 +672,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_ngmeta.service.ts.html#l44"><code>src&#x2F;ngmeta.service.ts:44</code></a>
+        <a href="../files/src_ngmeta.service.ts.html#l62"><code>src&#x2F;ngmeta.service.ts:62</code></a>
         </p>
 
 
@@ -650,7 +680,7 @@
     </div>
 
     <div class="description">
-        <p>Creates HTML for a title tag.</p>
+        <p>Sets <code>&lt;title&gt;&lt;/title&gt;</code> tag for page, to call <code>this._ngmeta.title = 'Google';</code>.</p>
 
     </div>
 

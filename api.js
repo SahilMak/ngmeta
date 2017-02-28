@@ -3,22 +3,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "NGMeta"
     ],
-    "modules": [
-        "MetaData",
-        "TagData"
-    ],
-    "allModules": [
-        {
-            "displayName": "MetaData",
-            "name": "MetaData",
-            "description": "An interface/data type for an the TagData interface."
-        },
-        {
-            "displayName": "TagData",
-            "name": "TagData",
-            "description": "An interface/data type for an object that is used with the 'setHead()' function."
-        }
-    ],
+    "modules": [],
+    "allModules": [],
     "elements": []
 } };
 });
